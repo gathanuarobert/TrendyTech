@@ -81,14 +81,43 @@ export default function LandingPage() {
         <h1 className="text-2xl font-bold text-yellow-400 z-[110]">
           Trendy<span className="text-white">Tech</span>
         </h1>
+        
+        {/* Desktop Links */}
         <ul className="hidden md:flex space-x-10 text-base font-bold tracking-wider">
           {navLinks.map((item) => (
             <li key={item} className="group relative cursor-pointer text-white/90 hover:text-yellow-400 transition-colors uppercase font-bold">{item}</li>
           ))}
         </ul>
+
+        {/* Hamburger Toggle Button */}
         <button className="md:hidden z-[110] focus:outline-none p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <span className="text-4xl font-light text-yellow-400">✕</span> : <div className="space-y-1.5"><span className="block w-8 h-0.5 bg-yellow-400 rounded"></span><span className="block w-8 h-0.5 bg-yellow-400 rounded"></span><span className="block w-8 h-0.5 bg-yellow-400 rounded"></span></div>}
+          {isMenuOpen ? (
+            <span className="text-4xl font-light text-yellow-400">✕</span>
+          ) : (
+            <div className="space-y-1.5">
+              <span className="block w-8 h-0.5 bg-yellow-400 rounded"></span>
+              <span className="block w-8 h-0.5 bg-yellow-400 rounded"></span>
+              <span className="block w-8 h-0.5 bg-yellow-400 rounded"></span>
+            </div>
+          )}
         </button>
+
+        {/* MOBILE OVERLAY MENU - RESTORED AND FIXED */}
+        <div className={`fixed inset-0 bg-black flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden z-[105] ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+          <div className="flex flex-col items-center space-y-10">
+            {navLinks.map((item, i) => (
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase().replace(" ", "")}`} 
+                className={`text-3xl font-bold uppercase tracking-[0.2em] transition-all duration-700 transform ${isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`} 
+                style={{ transitionDelay: `${i * 100}ms` }} 
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="hover:text-yellow-400 transition-colors">{item}</span>
+              </a>
+            ))}
+          </div>
+        </div>
       </nav>
 
       {/* HERO SECTION */}
@@ -105,7 +134,6 @@ export default function LandingPage() {
       {/*ABOUT SECTION*/}
       <section className="bg-black py-24 px-6 md:px-16 border-b border-white/5">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-          {/* Left Side: Bold Headline */}
           <div className="relative">
             <h3 className="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tighter">
               Professional CCTV <br /> 
@@ -113,16 +141,13 @@ export default function LandingPage() {
               <span className="text-yellow-400">in Nairobi Kenya</span>
             </h3>
           </div>
-
-          {/* Right Side: Description and Experience */}
           <div className="space-y-8">
             <p className="text-gray-300 text-lg md:text-xl leading-relaxed font-light">
-              <span className="text-white font-semibold">TrendyTech Security Systems</span> is an accredited specialist CCTV installation company in Nairobi Kenya, with more than 10 years’ experience in both the domestic and commercial service sectors. 
+              <span className="text-white font-semibold">TrendyTech Security Systems</span> is an accredited specialist CCTV installation company in Nairobi Kenya, with more than 10 years’ experience.
             </p>
             <p className="text-gray-400 text-lg leading-relaxed">
-              We are also a comprehensive provider of alarm systems, access control systems, and electric fences. For a cost effective, professional and reliable answer to your security issues, turn to TrendyTech. Our engineers continue to excel in their delivery throughout Kenya.
+              We are also a comprehensive provider of alarm systems, access control systems, and electric fences. For a cost effective, professional and reliable answer to your security issues, turn to TrendyTech.
             </p>
-
             <div className="pt-8">
               <div className="flex items-baseline gap-4">
                 <span className="text-7xl md:text-8xl font-black text-white">8+</span>
@@ -150,7 +175,8 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
-        {/* Mobile slider code omitted for brevity but remains the same as previous version */}
+
+        {/* MOBILE SLIDER */}
         <div className="md:hidden relative overflow-hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
           <div className={`flex ${animate ? "transition-transform duration-700 ease-in-out" : ""}`} style={{ transform: `translateX(-${index * 100}%)` }}>
             {slides.map((product, i) => (
@@ -173,24 +199,20 @@ export default function LandingPage() {
             <button onClick={nextSlide} className="w-12 h-12 flex items-center justify-center border border-yellow-400/30 text-yellow-400 rounded-full font-bold">→</button>
           </div>
         </div>
-
       </section>
 
-      {/* FOOTER / CONTACT SECTION (Matching Reference) */}
+      {/* FOOTER */}
       <footer className="bg-[#0a0a0a] pt-24 pb-12 px-6 md:px-16 relative overflow-hidden border-t border-white/10">
         <div className="max-w-7xl mx-auto">
-          {/* Header Text */}
           <div className="mb-16">
             <h3 className="text-xl md:text-2xl font-bold uppercase tracking-widest text-white mb-4">Let's talk about your needs.</h3>
             <h2 className="text-4xl md:text-7xl font-light text-gray-400 tracking-tight">Get in touch with us.</h2>
           </div>
-
-          {/* Contact Details */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
             <div className="space-y-6 text-gray-400 text-lg md:text-xl">
               <div className="flex items-start gap-4">
                 <span className="text-yellow-400 mt-1">📍</span>
-                <p>Jasmine Centre – Suite C5, Block C, Pio Gama Pinto Rd, off Waiyaki Way, Westlands, Nairobi Kenya</p>
+                <p>Jasmine Centre – Suite C5, Block C, Westlands, Nairobi Kenya</p>
               </div>
               <div className="flex items-start gap-4">
                 <span className="text-yellow-400 mt-1">📞</span>
@@ -198,25 +220,19 @@ export default function LandingPage() {
               </div>
               <div className="flex items-start gap-4">
                 <span className="text-yellow-400 mt-1">✉️</span>
-                <p className="hover:text-yellow-400 cursor-pointer transition-colors">info@trendytech.co.ke</p>
+                <p className="hover:text-yellow-400 transition-colors">info@trendytech.co.ke</p>
               </div>
             </div>
-
-            {/* Action Links */}
             <div className="flex flex-col gap-6 items-start md:items-end">
-              <button className="text-xl font-bold border-b-2 border-white/20 hover:border-yellow-400 pb-1 transition-all uppercase tracking-widest">Company Profile</button>
-              <button className="text-xl font-bold border-b-2 border-white/20 hover:border-yellow-400 pb-1 transition-all uppercase tracking-widest">Leave a message</button>
+              <button className="text-xl font-bold border-b-2 border-white/20 hover:border-yellow-400 pb-1 uppercase tracking-widest">Company Profile</button>
+              <button className="text-xl font-bold border-b-2 border-white/20 hover:border-yellow-400 pb-1 uppercase tracking-widest">Leave a message</button>
             </div>
           </div>
-
-          {/* Bottom Copyright Bar */}
           <div className="mt-32 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest gap-4">
             <p>© {new Date().getFullYear()} TrendyTech | All Rights Reserved</p>
-            <p>Developed by <span className="text-white font-bold cursor-pointer hover:text-yellow-400 transition-colors underline underline-offset-4">Apex Software Solutions</span></p>
+            <p>Developed by <span className="text-white font-bold transition-colors underline underline-offset-4">Apex Software Solutions</span></p>
           </div>
         </div>
-
-        {/* Stylized City Graphic (SVG background) */}
         <div className="absolute bottom-0 right-0 left-0 h-40 opacity-10 pointer-events-none">
           <svg className="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
              <path d="M0 100 V80 H50 V60 H100 V90 H150 V50 H200 V85 H250 V30 H300 V90 H350 V70 H400 V95 H450 V40 H500 V80 H550 V20 H600 V90 H650 V60 H700 V85 H750 V45 H800 V90 H850 V75 H900 V95 H950 V35 H1000 V100 Z" fill="none" stroke="white" strokeWidth="1" />
