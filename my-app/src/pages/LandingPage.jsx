@@ -77,49 +77,18 @@ export default function LandingPage() {
     <div className={`min-h-screen bg-black text-white overflow-hidden ${isMenuOpen ? 'h-screen' : ''}`}>
       
       {/* SEAMLESS NAVBAR */}
-      <nav 
-        className={`fixed top-0 w-full z-[100] transition-all duration-500 px-6 md:px-16 flex items-center justify-between ${
-          isScrolled && !isMenuOpen
-          ? "bg-black/80 backdrop-blur-lg border-b border-white/10 py-4" 
-          : "bg-transparent py-8"
-        }`}
-      >
+      <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 px-6 md:px-16 flex items-center justify-between ${isScrolled && !isMenuOpen ? "bg-black/80 backdrop-blur-lg border-b border-white/10 py-4" : "bg-transparent py-8"}`}>
         <h1 className="text-2xl font-bold text-yellow-400 z-[110]">
           Trendy<span className="text-white">Tech</span>
         </h1>
-        
         <ul className="hidden md:flex space-x-10 text-base font-bold tracking-wider">
           {navLinks.map((item) => (
-            <li key={item} className="group relative cursor-pointer text-white/90 hover:text-yellow-400 transition-colors uppercase font-bold">
-              {item}
-            </li>
+            <li key={item} className="group relative cursor-pointer text-white/90 hover:text-yellow-400 transition-colors uppercase font-bold">{item}</li>
           ))}
         </ul>
-        
-        <button 
-          className="md:hidden z-[110] focus:outline-none p-2"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? (
-            <span className="text-4xl font-light text-yellow-400">✕</span>
-          ) : (
-            <div className="space-y-1.5">
-              <span className="block w-8 h-0.5 bg-yellow-400 rounded"></span>
-              <span className="block w-8 h-0.5 bg-yellow-400 rounded"></span>
-              <span className="block w-8 h-0.5 bg-yellow-400 rounded"></span>
-            </div>
-          )}
+        <button className="md:hidden z-[110] focus:outline-none p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <span className="text-4xl font-light text-yellow-400">✕</span> : <div className="space-y-1.5"><span className="block w-8 h-0.5 bg-yellow-400 rounded"></span><span className="block w-8 h-0.5 bg-yellow-400 rounded"></span><span className="block w-8 h-0.5 bg-yellow-400 rounded"></span></div>}
         </button>
-
-        <div className={`fixed inset-0 bg-black flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden z-[105] ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-          <div className="flex flex-col items-center space-y-10">
-            {navLinks.map((item, i) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className={`text-3xl font-bold uppercase tracking-[0.2em] transition-all duration-700 transform ${isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`} style={{ transitionDelay: `${i * 100}ms` }} onClick={() => setIsMenuOpen(false)}>
-                <span className="hover:text-yellow-400 transition-colors">{item}</span>
-              </a>
-            ))}
-          </div>
-        </div>
       </nav>
 
       {/* HERO SECTION */}
@@ -128,38 +97,41 @@ export default function LandingPage() {
           <div key={i} className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${i === bgIndex ? "opacity-100" : "opacity-0"}`} style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.2) 100%), url(${img})`, backgroundSize: "cover", backgroundPosition: "center" }} />
         ))}
         <div className="relative z-10 max-w-3xl">
-          <h2 className="text-4xl md:text-7xl font-extrabold leading-tight">
-            Smart Electronics for a <span className="text-yellow-400">Smarter Life</span>
-          </h2>
-          <p className="mt-8 text-xl md:text-2xl text-gray-300 max-w-xl">
-            Premium CCTV cameras, smartphones and TVs — security and entertainment in one place.
-          </p>
+          <h2 className="text-4xl md:text-7xl font-extrabold leading-tight">Smart Electronics for a <span className="text-yellow-400">Smarter Life</span></h2>
+          <p className="mt-8 text-xl md:text-2xl text-gray-300 max-w-xl">Premium CCTV cameras, smartphones and TVs — security and entertainment in one place.</p>
         </div>
       </section>
 
-      {/* PROFESSIONAL SERVICES SECTION */}
-      <section className="bg-black py-20 px-6 md:px-16 border-t border-white/5">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          <div>
-            <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter leading-[1.1]">
+      {/*ABOUT SECTION*/}
+      <section className="bg-black py-24 px-6 md:px-16 border-b border-white/5">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          {/* Left Side: Bold Headline */}
+          <div className="relative">
+            <h3 className="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tighter">
               Professional CCTV <br /> 
               Installation Services <br /> 
-              <span className="text-yellow-400 text-3xl md:text-5xl block mt-2 font-black">in Nairobi Kenya</span>
+              <span className="text-yellow-400">in Nairobi Kenya</span>
             </h3>
           </div>
-          <div className="flex flex-col gap-6">
-            <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
-              <span className="text-white font-bold">TrendyTech Security Systems</span> is an accredited specialist CCTV installation company in Nairobi Kenya, with more than 10 years’ experience in both the domestic and commercial service sectors.
+
+          {/* Right Side: Description and Experience */}
+          <div className="space-y-8">
+            <p className="text-gray-300 text-lg md:text-xl leading-relaxed font-light">
+              <span className="text-white font-semibold">TrendyTech Security Systems</span> is an accredited specialist CCTV installation company in Nairobi Kenya, with more than 10 years’ experience in both the domestic and commercial service sectors. 
             </p>
-            <p className="text-gray-400 text-base md:text-lg leading-relaxed">
-              We are also a comprehensive provider of alarm systems, access control systems, and electric fences in Nairobi Kenya. Turn to TrendyTech Security Systems for a reliable answer to your security issues.
+            <p className="text-gray-400 text-lg leading-relaxed">
+              We are also a comprehensive provider of alarm systems, access control systems, and electric fences. For a cost effective, professional and reliable answer to your security issues, turn to TrendyTech. Our engineers continue to excel in their delivery throughout Kenya.
             </p>
-            <div className="mt-6 pt-6 border-t border-white/10 flex items-center gap-6">
-              <div className="text-6xl md:text-8xl font-black text-white">8+</div>
-              <div className="flex flex-col">
-                <span className="text-yellow-400 font-bold uppercase tracking-widest text-sm">Years of</span>
-                <span className="text-white font-black text-2xl uppercase tracking-tight">Experience</span>
+
+            <div className="pt-8">
+              <div className="flex items-baseline gap-4">
+                <span className="text-7xl md:text-8xl font-black text-white">8+</span>
+                <div className="flex flex-col">
+                  <span className="text-yellow-400 font-bold uppercase tracking-widest text-sm">Years of</span>
+                  <span className="text-white font-black text-2xl uppercase tracking-tighter">Experience</span>
+                </div>
               </div>
+              <div className="mt-4 w-20 h-1 bg-yellow-400"></div>
             </div>
           </div>
         </div>
@@ -167,27 +139,18 @@ export default function LandingPage() {
 
       {/* EXPLORE PRODUCTS SECTION */}
       <section className="px-6 md:px-16 py-24 bg-black relative z-10 border-t border-white/5">
-        <h3 className="text-3xl md:text-5xl font-bold text-center mb-16 tracking-widest uppercase">
-          EXPLORE OUR <span className="text-yellow-400">SERVICES</span>
-        </h3>
-
-        {/* DESKTOP VIEW: Static Grid (4 columns) */}
+        <h3 className="text-3xl md:text-5xl font-bold text-center mb-16 tracking-widest uppercase">EXPLORE OUR <span className="text-yellow-400">SERVICES</span></h3>
         <div className="hidden md:grid grid-cols-4 gap-6 max-w-7xl mx-auto">
           {products.map((product, i) => (
             <div key={i} className="bg-[#0a0a0a] border border-white/5 p-8 rounded-sm flex flex-col items-center text-center transition-all duration-300 hover:bg-[#111] hover:border-yellow-400/50 group">
-              <div className="h-40 flex items-center justify-center mb-8">
-                <img src={product.image} alt={product.name} className="max-h-full object-contain group-hover:scale-110 transition-transform duration-500" />
-              </div>
+              <div className="h-40 flex items-center justify-center mb-8"><img src={product.image} alt={product.name} className="max-h-full object-contain group-hover:scale-110 transition-transform duration-500" /></div>
               <h4 className="text-lg font-bold uppercase tracking-widest mb-4">{product.name}</h4>
               <p className="text-gray-400 text-xs leading-relaxed mb-8">{product.desc}</p>
-              <button className="mt-auto bg-yellow-400 text-black font-bold py-3 px-6 rounded-sm hover:bg-white transition-colors flex items-center gap-2 text-xs uppercase tracking-wider">
-                See More <span>→</span>
-              </button>
+              <button className="mt-auto bg-yellow-400 text-black font-bold py-3 px-6 rounded-sm hover:bg-white transition-colors flex items-center gap-2 text-xs uppercase tracking-wider">See More <span>→</span></button>
             </div>
           ))}
         </div>
-
-        {/* MOBILE VIEW: Slider */}
+        {/* Mobile slider code omitted for brevity but remains the same as previous version */}
         <div className="md:hidden relative overflow-hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
           <div className={`flex ${animate ? "transition-transform duration-700 ease-in-out" : ""}`} style={{ transform: `translateX(-${index * 100}%)` }}>
             {slides.map((product, i) => (
@@ -210,15 +173,54 @@ export default function LandingPage() {
             <button onClick={nextSlide} className="w-12 h-12 flex items-center justify-center border border-yellow-400/30 text-yellow-400 rounded-full font-bold">→</button>
           </div>
         </div>
+
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-gray-800 px-6 md:px-16 py-12 text-sm text-gray-400 flex flex-col md:flex-row justify-between bg-black items-center">
-        <p>© {new Date().getFullYear()} TrendyTech. All rights reserved.</p>
-        <div className="flex gap-8 mt-6 md:mt-0 uppercase font-bold tracking-widest text-xs">
-          <span className="hover:text-yellow-400 cursor-pointer">Privacy</span>
-          <span className="hover:text-yellow-400 cursor-pointer">Terms</span>
-          <span className="hover:text-yellow-400 cursor-pointer">Support</span>
+      {/* FOOTER / CONTACT SECTION (Matching Reference) */}
+      <footer className="bg-[#0a0a0a] pt-24 pb-12 px-6 md:px-16 relative overflow-hidden border-t border-white/10">
+        <div className="max-w-7xl mx-auto">
+          {/* Header Text */}
+          <div className="mb-16">
+            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-widest text-white mb-4">Let's talk about your needs.</h3>
+            <h2 className="text-4xl md:text-7xl font-light text-gray-400 tracking-tight">Get in touch with us.</h2>
+          </div>
+
+          {/* Contact Details */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+            <div className="space-y-6 text-gray-400 text-lg md:text-xl">
+              <div className="flex items-start gap-4">
+                <span className="text-yellow-400 mt-1">📍</span>
+                <p>Jasmine Centre – Suite C5, Block C, Pio Gama Pinto Rd, off Waiyaki Way, Westlands, Nairobi Kenya</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <span className="text-yellow-400 mt-1">📞</span>
+                <p>(+254) 0792735124</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <span className="text-yellow-400 mt-1">✉️</span>
+                <p className="hover:text-yellow-400 cursor-pointer transition-colors">info@trendytech.co.ke</p>
+              </div>
+            </div>
+
+            {/* Action Links */}
+            <div className="flex flex-col gap-6 items-start md:items-end">
+              <button className="text-xl font-bold border-b-2 border-white/20 hover:border-yellow-400 pb-1 transition-all uppercase tracking-widest">Company Profile</button>
+              <button className="text-xl font-bold border-b-2 border-white/20 hover:border-yellow-400 pb-1 transition-all uppercase tracking-widest">Leave a message</button>
+            </div>
+          </div>
+
+          {/* Bottom Copyright Bar */}
+          <div className="mt-32 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest gap-4">
+            <p>© {new Date().getFullYear()} TrendyTech | All Rights Reserved</p>
+            <p>Developed by <span className="text-white font-bold cursor-pointer hover:text-yellow-400 transition-colors underline underline-offset-4">Apex Software Solutions</span></p>
+          </div>
+        </div>
+
+        {/* Stylized City Graphic (SVG background) */}
+        <div className="absolute bottom-0 right-0 left-0 h-40 opacity-10 pointer-events-none">
+          <svg className="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
+             <path d="M0 100 V80 H50 V60 H100 V90 H150 V50 H200 V85 H250 V30 H300 V90 H350 V70 H400 V95 H450 V40 H500 V80 H550 V20 H600 V90 H650 V60 H700 V85 H750 V45 H800 V90 H850 V75 H900 V95 H950 V35 H1000 V100 Z" fill="none" stroke="white" strokeWidth="1" />
+          </svg>
         </div>
       </footer>
     </div>
