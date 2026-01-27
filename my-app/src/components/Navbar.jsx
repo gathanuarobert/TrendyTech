@@ -37,7 +37,12 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 px-6 md:px-16 flex items-center justify-between ${isScrolled && !isMenuOpen ? "bg-black/80 backdrop-blur-lg border-b border-white/10 py-4" : "bg-transparent py-8"}`}>
+    <nav 
+      className={`fixed top-0 w-full z-[100] transition-all duration-500 px-6 md:px-16 flex items-center justify-between 
+      ${isScrolled && !isMenuOpen 
+        ? "bg-[#050505] backdrop-blur-xl border-b border-white/10 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]" 
+        : "bg-transparent py-8"}`}
+    >
       <h1 className="text-2xl font-bold text-yellow-400 z-[110]">
         Trendy<span className="text-white">Tech</span>
       </h1>
@@ -59,7 +64,7 @@ const Navbar = () => {
             </Link>
 
             {item.dropdown && activeDropdown === item.name && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-[#0a0a0a] border border-white/10 py-4 shadow-2xl">
+              <div className="absolute top-full left-0 mt-2 w-64 bg-[#0a0a0a] border border-white/10 py-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
                 {item.dropdown.map((sub) => (
                   <Link key={sub.name} to={sub.path} className="block px-6 py-2 text-sm text-gray-400 hover:text-yellow-400 hover:bg-white/5 transition-all">
                     {sub.name}
