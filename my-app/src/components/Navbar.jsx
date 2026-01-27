@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +37,18 @@ const Navbar = () => {
     { name: "Why Us", href: "/whyUs" }
   ];
 
+  // Desktop Hover Logic with Delay
+  const handleMouseEnter = (name) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(name);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 400); // 400ms delay so it doesn't vanish instantly
+  };
+
   return (
     <nav 
       className={`fixed top-0 w-full z-[100] transition-all duration-500 px-6 md:px-16 flex items-center justify-between 
@@ -53,8 +66,8 @@ const Navbar = () => {
           <li 
             key={item.name} 
             className="relative group cursor-pointer"
-            onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
-            onMouseLeave={() => setActiveDropdown(null)}
+            onMouseEnter={() => item.dropdown && handleMouseEnter(item.name)}
+            onMouseLeave={handleMouseLeave}
           >
             <Link to={item.href || "#"} className="text-white/90 hover:text-yellow-400 transition-colors uppercase font-bold flex items-center gap-1">
               {item.name}
@@ -64,7 +77,10 @@ const Navbar = () => {
             </Link>
 
             {item.dropdown && activeDropdown === item.name && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-[#0a0a0a] border border-white/10 py-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
+              <div 
+                className="absolute top-full left-0 mt-2 w-64 bg-[#0a0a0a] border border-white/10 py-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200"
+                onMouseEnter={() => handleMouseEnter(item.name)}
+              >
                 {item.dropdown.map((sub) => (
                   <Link key={sub.name} to={sub.path} className="block px-6 py-2 text-sm text-gray-400 hover:text-yellow-400 hover:bg-white/5 transition-all">
                     {sub.name}
@@ -106,20 +122,32 @@ const Navbar = () => {
                 {item.dropdown && (
                   <button 
                     onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
-                    className="text-yellow-400 text-xl"
+                    className="text-yellow-400 text-xl transition-transform duration-300"
+                    style={{ transform: activeDropdown === item.name ? 'rotate(180deg)' : 'rotate(0deg)' }}
                   >
                     ▼
                   </button>
                 )}
               </div>
               
-              {item.dropdown && activeDropdown === item.name && (
-                <div className="flex flex-col items-center mt-4 space-y-3 bg-white/5 w-full py-4 rounded">
-                  {item.dropdown.map((sub) => (
-                    <Link key={sub.name} to={sub.path} onClick={() => setIsMenuOpen(false)} className="text-gray-400 uppercase text-sm hover:text-yellow-400">
-                      {sub.name}
-                    </Link>
-                  ))}
+              {/* Mobile Dropdown with Seamless Transition */}
+              {item.dropdown && (
+                <div className={`grid transition-all duration-500 ease-in-out w-full ${activeDropdown === item.name ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0"}`}>
+                  <div className="overflow-hidden flex flex-col items-center space-y-3 bg-white/5 w-full py-2 rounded">
+                    {item.dropdown.map((sub) => (
+                      <Link 
+                        key={sub.name} 
+                        to={sub.path} 
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setActiveDropdown(null);
+                        }} 
+                        className="text-gray-400 uppercase text-sm hover:text-yellow-400 py-2 w-full text-center transition-colors"
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
