@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar"; // Make sure the path to your Navbar file is correct
+import Navbar from "../components/Navbar"; 
+import Footer from "../components/Footer"; // <--- Import the Footer
 
 export default function LandingPage() {
   // --- BACKGROUND SLIDER LOGIC ---
@@ -64,10 +65,9 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       
-      {/* INJECTED NAVBAR COMPONENT */}
       <Navbar />
 
-      {/* SECTIONS */}
+      {/* HERO SECTION */}
       <section className="relative h-screen flex items-center px-6 md:px-20">
         {heroImages.map((img, i) => (
           <div key={i} className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${i === bgIndex ? "opacity-100" : "opacity-0"}`} style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.2) 100%), url(${img})`, backgroundSize: "cover", backgroundPosition: "center" }} />
@@ -78,6 +78,7 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ABOUT SECTION */}
       <section className="bg-black py-24 px-6 md:px-16 border-b border-white/5">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div className="relative">
@@ -108,6 +109,7 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* SERVICES SECTION */}
       <section className="px-6 md:px-16 py-24 bg-black relative z-10 border-t border-white/5">
         <h3 className="text-3xl md:text-5xl font-bold text-center mb-16 tracking-widest uppercase">EXPLORE OUR <span className="text-yellow-400">SERVICES</span></h3>
         <div className="hidden md:grid grid-cols-4 gap-6 max-w-7xl mx-auto">
@@ -121,6 +123,7 @@ export default function LandingPage() {
           ))}
         </div>
 
+        {/* MOBILE SLIDER */}
         <div className="md:hidden relative overflow-hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
           <div className={`flex ${animate ? "transition-transform duration-700 ease-in-out" : ""}`} style={{ transform: `translateX(-${index * 100}%)` }}>
             {slides.map((product, i) => (
@@ -145,43 +148,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="bg-[#0a0a0a] pt-24 pb-12 px-6 md:px-16 relative overflow-hidden border-t border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-widest text-white mb-4">Let's talk about your needs.</h3>
-            <h2 className="text-4xl md:text-7xl font-light text-gray-400 tracking-tight">Get in touch with us.</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
-            <div className="space-y-6 text-gray-400 text-lg md:text-xl">
-              <div className="flex items-start gap-4">
-                <span className="text-yellow-400 mt-1">📍</span>
-                <p>Jasmine Centre – Suite C5, Block C, Westlands, Nairobi Kenya</p>
-              </div>
-              <div className="flex items-start gap-4">
-                <span className="text-yellow-400 mt-1">📞</span>
-                <p>(+254) 0792735124</p>
-              </div>
-              <div className="flex items-start gap-4">
-                <span className="text-yellow-400 mt-1">✉️</span>
-                <p className="hover:text-yellow-400 transition-colors">info@trendytech.co.ke</p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-6 items-start md:items-end">
-              <button className="text-xl font-bold border-b-2 border-white/20 hover:border-yellow-400 pb-1 uppercase tracking-widest">Company Profile</button>
-              <button className="text-xl font-bold border-b-2 border-white/20 hover:border-yellow-400 pb-1 uppercase tracking-widest">Leave a message</button>
-            </div>
-          </div>
-          <div className="mt-32 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest gap-4">
-            <p>© {new Date().getFullYear()} TrendyTech | All Rights Reserved</p>
-            <p>Developed by <span className="text-white font-bold transition-colors underline underline-offset-4">Apex Software Solutions</span></p>
-          </div>
-        </div>
-        <div className="absolute bottom-0 right-0 left-0 h-40 opacity-10 pointer-events-none">
-          <svg className="w-full h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
-             <path d="M0 100 V80 H50 V60 H100 V90 H150 V50 H200 V85 H250 V30 H300 V90 H350 V70 H400 V95 H450 V40 H500 V80 H550 V20 H600 V90 H650 V60 H700 V85 H750 V45 H800 V90 H850 V75 H900 V95 H950 V35 H1000 V100 Z" fill="none" stroke="white" strokeWidth="1" />
-          </svg>
-        </div>
-      </footer>
+      {/* FOOTER COMPONENT */}
+      <Footer />
+
     </div>
   );
 }
