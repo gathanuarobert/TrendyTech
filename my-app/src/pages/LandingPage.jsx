@@ -19,12 +19,32 @@ export default function LandingPage() {
     return () => clearInterval(bgInterval);
   }, [heroImages.length]);
 
-  // --- PRODUCTS DATA ---
+  // --- PRODUCTS DATA (Descriptions Updated & Links Added) ---
   const products = [
-    { name: "Smart CCTV Camera", image: "https://images.unsplash.com/photo-1590613607026-15c463e30ca5?q=80&w=387", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore." },
-    { name: "Smart TV", image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=400", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore." },
-    { name: "Smartphone", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=400", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore." },
-    { name: "Security System", image: "https://images.unsplash.com/photo-1589935447067-5531094415d1?q=80&w=400", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore." },
+    { 
+      name: "Smart CCTV Camera", 
+      image: "https://images.unsplash.com/photo-1590613607026-15c463e30ca5?q=80&w=387", 
+      desc: "High-definition surveillance with night vision and remote mobile viewing. We provide and install complete sets for 24/7 protection.",
+      path: "/cctvKits"
+    },
+    { 
+      name: "Smart TV", 
+      image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=400", 
+      desc: "Immersive 4K displays featuring the latest smart apps and seamless connectivity. Upgrade your home entertainment with our premium range.",
+      path: "/electronics"
+    },
+    { 
+      name: "Smartphone", 
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=400", 
+      desc: "Stay connected with the latest high-performance smartphones. We offer top-tier brands with official warranties and technical support.",
+      path: "/electronics"
+    },
+    { 
+      name: "Electric Fence", 
+      image: "https://images.unsplash.com/photo-1589935447067-5531094415d1?q=80&w=400", 
+      desc: "Advanced perimeter protection featuring high-tension wires and instant alarm triggers. Secure your property with our professional fencing.",
+      path: "/electricFence"
+    },
   ];
 
   // --- MOBILE SLIDER LOGIC ---
@@ -118,7 +138,9 @@ export default function LandingPage() {
               <div className="h-40 flex items-center justify-center mb-8"><img src={product.image} alt={product.name} className="max-h-full object-contain group-hover:scale-110 transition-transform duration-500" /></div>
               <h4 className="text-lg font-bold uppercase tracking-widest mb-4">{product.name}</h4>
               <p className="text-gray-400 text-xs leading-relaxed mb-8">{product.desc}</p>
-              <button className="mt-auto bg-yellow-400 text-black font-bold py-3 px-6 rounded-sm hover:bg-white transition-colors flex items-center gap-2 text-xs uppercase tracking-wider">See More <span>→</span></button>
+              <Link to={product.path} className="mt-auto bg-yellow-400 text-black font-bold py-3 px-6 rounded-sm hover:bg-white transition-colors flex items-center gap-2 text-xs uppercase tracking-wider">
+                See More <span>→</span>
+              </Link>
             </div>
           ))}
         </div>
@@ -134,9 +156,9 @@ export default function LandingPage() {
                   </div>
                   <h4 className="text-xl font-bold uppercase tracking-widest mb-4">{product.name}</h4>
                   <p className="text-gray-400 text-sm leading-relaxed mb-8">{product.desc}</p>
-                  <button className="bg-yellow-400 text-black font-bold py-3 px-8 rounded-sm text-sm uppercase tracking-wider">
+                  <Link to={product.path} className="bg-yellow-400 text-black font-bold py-3 px-8 rounded-sm text-sm uppercase tracking-wider inline-block">
                     See More →
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
