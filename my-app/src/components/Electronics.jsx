@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Electronics = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,64 +43,96 @@ const Electronics = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-32 pb-20 px-6 md:px-16 relative">
+    <div className="min-h-screen bg-black text-white relative">
       
-      {/* Navigation */}
-      <Link to="/" className="text-yellow-400 font-bold uppercase tracking-widest text-xs mb-12 inline-flex items-center gap-2 hover:translate-x-[-5px] transition-transform">
-        <span>←</span> Back to Home
-      </Link>
+      {/* Navigation - Remains Visible */}
+      <Navbar />
 
-      {/* Centered Header Section */}
-      <header className="flex flex-col items-center text-center max-w-5xl mx-auto mb-16">
-        <h1 className="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-6 leading-none">
-          Electronics <span className="text-yellow-400">Excellence Center</span>
-        </h1>
-        <p className="text-gray-400 text-base md:text-lg max-w-2xl leading-relaxed border-t border-yellow-400/30 pt-6">
-          Upgrade your lifestyle with our curated collection of {allElectronics.length} high-end electronic devices. From computing power to audio precision, find the tech that moves you.
-        </p>
+      {/* Main Page Content Wrapper - Hides when a card is active */}
+      <div className={`transition-all duration-500 ${activeCard ? "opacity-0 pointer-events-none scale-95" : "opacity-100"}`}>
+        {/* Background Aesthetic Glow */}
+        <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-yellow-400/10 to-transparent pointer-events-none" />
 
-        {/* Search Bar */}
-        <div className="mt-10 w-full max-w-md relative group">
-          <input 
-            type="text" 
-            placeholder="Search electronics..." 
-            value={searchQuery}
-            onChange={handleSearchChange}
-            className="w-full bg-zinc-900/50 border border-white/10 px-6 py-4 rounded-full text-sm focus:outline-none focus:border-yellow-400/50 transition-all placeholder:text-zinc-600 font-bold tracking-wider"
-          />
-          <span className="absolute right-6 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-yellow-400 transition-colors">
-            🔍
-          </span>
-        </div>
-      </header>
+        {/* Main Content Wrap */}
+        <div className="pt-44 pb-20 px-6 md:px-16 relative z-10">
+          
+          {/* Centered Header Section */}
+          <header className="flex flex-col items-center text-center max-w-5xl mx-auto mb-16">
+            <h1 className="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-6 leading-none">
+              Electronics <span className="text-yellow-400">Excellence Center</span>
+            </h1>
+            <p className="text-gray-400 text-base md:text-lg max-w-2xl leading-relaxed border-t border-yellow-400/30 pt-6">
+              Upgrade your lifestyle with our curated collection of {allElectronics.length} high-end electronic devices. From computing power to audio precision, find the tech that moves you.
+            </p>
 
-      {/* Product Grid */}
-      {currentTech.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
-          {currentTech.map((item) => (
-            <div 
-              key={item.id}
-              onClick={() => setActiveCard(item)}
-              className="group cursor-pointer bg-zinc-900/30 border border-white/5 p-4 transition-all duration-300 hover:border-yellow-400/50 hover:bg-zinc-900/50"
-            >
-              <div className="relative aspect-square overflow-hidden mb-6 bg-zinc-800">
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-xs uppercase font-bold tracking-tighter bg-yellow-400 text-black px-4 py-2">Quick View</span>
-                </div>
-              </div>
-              <h3 className="text-sm font-bold uppercase tracking-widest mb-2 line-clamp-1">{item.name}</h3>
-              <p className="text-yellow-400 font-black text-lg">{item.price}</p>
+            {/* Search Bar */}
+            <div className="mt-10 w-full max-w-md relative group">
+              <input 
+                type="text" 
+                placeholder="Search electronics..." 
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="w-full bg-zinc-900/50 border border-white/10 px-6 py-4 rounded-full text-sm focus:outline-none focus:border-yellow-400/50 transition-all placeholder:text-zinc-600 font-bold tracking-wider"
+              />
+              <span className="absolute right-6 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-yellow-400 transition-colors">
+                🔍
+              </span>
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-20 italic text-zinc-600 tracking-widest">
-          No electronic items found matching your search.
-        </div>
-      )}
+          </header>
 
-      {/* Modal - Details & WhatsApp */}
+          {/* Product Grid */}
+          {currentTech.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+              {currentTech.map((item) => (
+                <div 
+                  key={item.id}
+                  onClick={() => setActiveCard(item)}
+                  className="group cursor-pointer bg-zinc-900/30 border border-white/5 p-4 transition-all duration-300 hover:border-yellow-400/50 hover:bg-zinc-900/50"
+                >
+                  <div className="relative aspect-square overflow-hidden mb-6 bg-zinc-800">
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="text-xs uppercase font-bold tracking-tighter bg-yellow-400 text-black px-4 py-2">Quick View</span>
+                    </div>
+                  </div>
+                  <h3 className="text-sm font-bold uppercase tracking-widest mb-2 line-clamp-1">{item.name}</h3>
+                  <p className="text-yellow-400 font-black text-lg">{item.price}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 italic text-zinc-600 tracking-widest">
+              No electronic items found matching your search.
+            </div>
+          )}
+
+          {/* Pagination Controls */}
+          {filteredTech.length > itemsPerPage && (
+            <div className="mt-20 flex justify-center items-center gap-6">
+              <button 
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(prev => prev - 1)}
+                className={`px-6 py-2 border rounded-full text-xs font-bold uppercase tracking-widest transition-all ${currentPage === 1 ? 'border-zinc-800 text-zinc-800' : 'border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black'}`}
+              >Prev</button>
+              
+              <span className="text-xs font-bold tracking-[0.5em] text-zinc-500 uppercase">
+                  Page <span className="text-white">{currentPage}</span> of {totalPages}
+              </span>
+
+              <button 
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage(prev => prev + 1)}
+                className={`px-6 py-2 border rounded-full text-xs font-bold uppercase tracking-widest transition-all ${currentPage === totalPages ? 'border-zinc-800 text-zinc-800' : 'border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black'}`}
+              >Next</button>
+            </div>
+          )}
+        </div>
+        
+        {/* Footer inside the wrapper so it also hides */}
+        <Footer />
+      </div>
+
+      {/* Modal - Details & WhatsApp (Sits outside the hiding wrapper) */}
       {activeCard && (
         <div className="fixed inset-0 z-[1000] flex items-center justify-center p-2 md:p-6">
           <div className="absolute inset-0 bg-black/95 backdrop-blur-sm" onClick={() => setActiveCard(null)}></div>
@@ -125,27 +159,6 @@ const Electronics = () => {
               </div>
             </div>
           </div>
-        </div>
-      )}
-
-      {/* Pagination Controls */}
-      {filteredTech.length > itemsPerPage && (
-        <div className="mt-20 flex justify-center items-center gap-6">
-          <button 
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(prev => prev - 1)}
-            className={`px-6 py-2 border rounded-full text-xs font-bold uppercase tracking-widest transition-all ${currentPage === 1 ? 'border-zinc-800 text-zinc-800' : 'border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black'}`}
-          >Prev</button>
-          
-          <span className="text-xs font-bold tracking-[0.5em] text-zinc-500 uppercase">
-              Page <span className="text-white">{currentPage}</span> of {totalPages}
-          </span>
-
-          <button 
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage(prev => prev + 1)}
-            className={`px-6 py-2 border rounded-full text-xs font-bold uppercase tracking-widest transition-all ${currentPage === totalPages ? 'border-zinc-800 text-zinc-800' : 'border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black'}`}
-          >Next</button>
         </div>
       )}
     </div>
