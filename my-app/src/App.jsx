@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes} from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import CctvInstallation from "./components/CctvInstallation";
 import ElectricFence from "./components/ElectricFence";
@@ -12,9 +12,21 @@ import Products from "./pages/Products";
 import Services from "./pages/Services";
 import WhyUs from "./pages/WhyUs";
 
+// This helper function resets the scroll to the top every time the URL changes
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 const AppRoutes = () => {
   return (
-    
+    <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path='/contacts' element={<Contacts />} />
@@ -28,7 +40,7 @@ const AppRoutes = () => {
         <Route path='/electricFenceInstallation' element={<ElectricFenceInstallation />} />
         <Route path='/cctvKits' element={<CCTVKits />} />
       </Routes>
-    
+    </>
   );
 }
 
