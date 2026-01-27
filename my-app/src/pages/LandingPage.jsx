@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom"; // Import Link for routing
 
 export default function LandingPage() {
   // --- NAVBAR & MOBILE MENU STATE ---
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // Dropdown States
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,7 +75,28 @@ export default function LandingPage() {
     isDragging.current = false;
   };
 
-  const navLinks = ["Home", "Products", "Services", "Contacts", "Why Us"];
+  // --- NAVIGATION CONFIG MAPPED TO YOUR ROUTES ---
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { 
+      name: "Products",  
+      dropdown: [
+        { name: "Electronics", path: "/electronics" },
+        { name: "CCTV kits", path: "/cctvKits" },
+        { name: "Electric Fences", path: "/electricFence" }
+      ] 
+    },
+    { 
+      name: "Services",  
+      dropdown: [
+        { name: "CCTV Installation", path: "/cctvInstallation" },
+        { name: "Electric Fence Installation", path: "/electricFenceInstallation" },
+        { name: "CCTV Footage Recovery", path: "/recovery" }
+      ] 
+    },
+    { name: "Contacts", href: "/contacts" },
+    { name: "Why Us", href: "/whyUs" }
+  ];
 
   return (
     <div className={`min-h-screen bg-black text-white overflow-hidden ${isMenuOpen ? 'h-screen' : ''}`}>
@@ -85,7 +110,30 @@ export default function LandingPage() {
         {/* Desktop Links */}
         <ul className="hidden md:flex space-x-10 text-base font-bold tracking-wider">
           {navLinks.map((item) => (
-            <li key={item} className="group relative cursor-pointer text-white/90 hover:text-yellow-400 transition-colors uppercase font-bold">{item}</li>
+            <li 
+              key={item.name} 
+              className="relative group cursor-pointer"
+              onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <Link to={item.href} className="text-white/90 hover:text-yellow-400 transition-colors uppercase font-bold flex items-center gap-1">
+                {item.name}
+                {item.dropdown && (
+                  <span className={`text-[10px] transition-transform duration-300 ${activeDropdown === item.name ? "rotate-180" : ""}`}>▼</span>
+                )}
+              </Link>
+
+              {/* Dropdown Menu */}
+              {item.dropdown && activeDropdown === item.name && (
+                <div className="absolute top-full left-0 mt-2 w-64 bg-[#0a0a0a] border border-white/10 py-4 shadow-2xl">
+                  {item.dropdown.map((sub) => (
+                    <Link key={sub.name} to={sub.path} className="block px-6 py-2 text-sm text-gray-400 hover:text-yellow-400 hover:bg-white/5 transition-all">
+                      {sub.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </li>
           ))}
         </ul>
 
@@ -102,25 +150,46 @@ export default function LandingPage() {
           )}
         </button>
 
-        {/* MOBILE OVERLAY MENU - RESTORED AND FIXED */}
+        {/* MOBILE OVERLAY MENU */}
         <div className={`fixed inset-0 bg-black flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden z-[105] ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-          <div className="flex flex-col items-center space-y-10">
+          <div className="flex flex-col items-center space-y-6 w-full px-10">
             {navLinks.map((item, i) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase().replace(" ", "")}`} 
-                className={`text-3xl font-bold uppercase tracking-[0.2em] transition-all duration-700 transform ${isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`} 
-                style={{ transitionDelay: `${i * 100}ms` }} 
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span className="hover:text-yellow-400 transition-colors">{item}</span>
-              </a>
+              <div key={item.name} className="flex flex-col items-center w-full">
+                <div className="flex items-center gap-2">
+                  <Link 
+                    to={item.href} 
+                    className={`text-2xl font-bold uppercase tracking-[0.2em] transition-all duration-700 transform ${isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`} 
+                    style={{ transitionDelay: `${i * 100}ms` }} 
+                    onClick={() => !item.dropdown && setIsMenuOpen(false)}
+                  >
+                    <span className="hover:text-yellow-400 transition-colors">{item.name}</span>
+                  </Link>
+                  {item.dropdown && (
+                    <button 
+                      onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                      className="text-yellow-400 text-xl"
+                    >
+                      ▼
+                    </button>
+                  )}
+                </div>
+                
+                {item.dropdown && activeDropdown === item.name && (
+                  <div className="flex flex-col items-center mt-4 space-y-3 bg-white/5 w-full py-4 rounded">
+                    {item.dropdown.map((sub) => (
+                      <Link key={sub.name} to={sub.path} onClick={() => setIsMenuOpen(false)} className="text-gray-400 uppercase text-sm hover:text-yellow-400">
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
       </nav>
 
-      {/* HERO SECTION */}
+      {/* SECTIONS */}
       <section className="relative h-screen flex items-center px-6 md:px-20">
         {heroImages.map((img, i) => (
           <div key={i} className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${i === bgIndex ? "opacity-100" : "opacity-0"}`} style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.2) 100%), url(${img})`, backgroundSize: "cover", backgroundPosition: "center" }} />
@@ -131,7 +200,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/*ABOUT SECTION*/}
       <section className="bg-black py-24 px-6 md:px-16 border-b border-white/5">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div className="relative">
@@ -162,7 +230,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* EXPLORE PRODUCTS SECTION */}
       <section className="px-6 md:px-16 py-24 bg-black relative z-10 border-t border-white/5">
         <h3 className="text-3xl md:text-5xl font-bold text-center mb-16 tracking-widest uppercase">EXPLORE OUR <span className="text-yellow-400">SERVICES</span></h3>
         <div className="hidden md:grid grid-cols-4 gap-6 max-w-7xl mx-auto">
@@ -176,7 +243,6 @@ export default function LandingPage() {
           ))}
         </div>
 
-        {/* MOBILE SLIDER */}
         <div className="md:hidden relative overflow-hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
           <div className={`flex ${animate ? "transition-transform duration-700 ease-in-out" : ""}`} style={{ transform: `translateX(-${index * 100}%)` }}>
             {slides.map((product, i) => (
@@ -201,7 +267,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="bg-[#0a0a0a] pt-24 pb-12 px-6 md:px-16 relative overflow-hidden border-t border-white/10">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16">
