@@ -83,10 +83,10 @@ const ElectricFenceInstallation = () => {
           >
              <div className="grid grid-cols-2 gap-4">
                 <div className="bg-zinc-900 p-1 rounded-lg">
-                    <img src="https://images.unsplash.com/photo-1558002038-103792e07a70?q=80&w=400" alt="Security Detail" className="rounded grayscale hover:grayscale-0 transition-all duration-500" />
+                    <img src="https://www.alltechkenya.co.ke/wp-content/uploads/2022/08/Electric-Fence-Installation-in-Nairobi-Kenya.jpg" alt="Security Detail" className="rounded grayscale hover:grayscale-0 transition-all duration-500" />
                 </div>
                 <div className="bg-zinc-900 p-1 rounded-lg mt-8">
-                    <img src="https://images.unsplash.com/photo-1549109926-9620d1b9bfa2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZWxlY3RyaWMlMjBwZXJpbWV0ZXIlMjBmZW5jZXxlbnwwfHwwfHx8MA%3D%3D" alt="Technical Setup" className="rounded grayscale hover:grayscale-0 transition-all duration-500" />
+                    <img src="https://images.unsplash.com/photo-1728303945623-bff2332c5356?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGVsZWN0cmljJTIwZmVuY2UlMjB3YXJuaW5nJTIwc2lnbnxlbnwwfHwwfHx8MA%3D%3D" alt="Technical Setup" className="rounded grayscale hover:grayscale-0 transition-all duration-500" />
                 </div>
              </div>
           </motion.div>
