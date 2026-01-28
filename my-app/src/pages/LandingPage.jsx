@@ -1,9 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion"; // 1. Added Framer Motion
 import Navbar from "../components/Navbar"; 
-import Footer from "../components/Footer"; // <--- Import the Footer
+import Footer from "../components/Footer"; 
 
 export default function LandingPage() {
+  // --- ANIMATION VARIANTS ---
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
+
   // --- BACKGROUND SLIDER LOGIC ---
   const [bgIndex, setBgIndex] = useState(0);
   const heroImages = [
@@ -19,7 +34,7 @@ export default function LandingPage() {
     return () => clearInterval(bgInterval);
   }, [heroImages.length]);
 
-  // --- PRODUCTS DATA (Descriptions Updated & Links Added) ---
+  // --- PRODUCTS DATA ---
   const products = [
     { 
       name: "Smart CCTV Camera", 
@@ -92,14 +107,26 @@ export default function LandingPage() {
         {heroImages.map((img, i) => (
           <div key={i} className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${i === bgIndex ? "opacity-100" : "opacity-0"}`} style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.2) 100%), url(${img})`, backgroundSize: "cover", backgroundPosition: "center" }} />
         ))}
-        <div className="relative z-10 max-w-3xl">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="relative z-10 max-w-3xl"
+        >
           <h2 className="text-4xl md:text-7xl font-extrabold leading-tight">Smart Electronics for a <span className="text-yellow-400">Smarter Life</span></h2>
           <p className="mt-8 text-xl md:text-2xl text-gray-300 max-w-xl">Premium CCTV cameras, smartphones and TVs — security and entertainment in one place.</p>
-        </div>
+        </motion.div>
       </section>
 
       {/* ABOUT SECTION */}
-      <section className="bg-black py-24 px-6 md:px-16 border-b border-white/5">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="bg-black py-24 px-6 md:px-16 border-b border-white/5"
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div className="relative">
             <h3 className="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tighter">
@@ -127,26 +154,52 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* SERVICES SECTION */}
       <section className="px-6 md:px-16 py-24 bg-black relative z-10 border-t border-white/5">
-        <h3 className="text-3xl md:text-5xl font-bold text-center mb-16 tracking-widest uppercase">EXPLORE OUR <span className="text-yellow-400">SERVICES</span></h3>
-        <div className="hidden md:grid grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <motion.h3 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="text-3xl md:text-5xl font-bold text-center mb-16 tracking-widest uppercase"
+        >
+          EXPLORE OUR <span className="text-yellow-400">SERVICES</span>
+        </motion.h3>
+        
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="hidden md:grid grid-cols-4 gap-6 max-w-7xl mx-auto"
+        >
           {products.map((product, i) => (
-            <div key={i} className="bg-[#0a0a0a] border border-white/5 p-8 rounded-sm flex flex-col items-center text-center transition-all duration-300 hover:bg-[#111] hover:border-yellow-400/50 group">
+            <motion.div 
+              key={i} 
+              variants={fadeInUp}
+              className="bg-[#0a0a0a] border border-white/5 p-8 rounded-sm flex flex-col items-center text-center transition-all duration-300 hover:bg-[#111] hover:border-yellow-400/50 group"
+            >
               <div className="h-40 flex items-center justify-center mb-8"><img src={product.image} alt={product.name} className="max-h-full object-contain group-hover:scale-110 transition-transform duration-500" /></div>
               <h4 className="text-lg font-bold uppercase tracking-widest mb-4">{product.name}</h4>
               <p className="text-gray-400 text-xs leading-relaxed mb-8">{product.desc}</p>
               <Link to={product.path} className="mt-auto bg-yellow-400 text-black font-bold py-3 px-6 rounded-sm hover:bg-white transition-colors flex items-center gap-2 text-xs uppercase tracking-wider">
                 See More <span>→</span>
               </Link>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* MOBILE SLIDER */}
-        <div className="md:hidden relative overflow-hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="md:hidden relative overflow-hidden" 
+          onTouchStart={handleTouchStart} 
+          onTouchEnd={handleTouchEnd}
+        >
           <div className={`flex ${animate ? "transition-transform duration-700 ease-in-out" : ""}`} style={{ transform: `translateX(-${index * 100}%)` }}>
             {slides.map((product, i) => (
               <div key={i} className="min-w-full px-4">
@@ -167,12 +220,10 @@ export default function LandingPage() {
             <button onClick={prevSlide} className="w-12 h-12 flex items-center justify-center border border-yellow-400/30 text-yellow-400 rounded-full font-bold">←</button>
             <button onClick={nextSlide} className="w-12 h-12 flex items-center justify-center border border-yellow-400/30 text-yellow-400 rounded-full font-bold">→</button>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* FOOTER COMPONENT */}
       <Footer />
-
     </div>
   );
 }

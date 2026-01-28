@@ -1,9 +1,24 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { motion } from 'framer-motion'; // 1. Added Framer Motion
 
 const WhyUs = () => {
   const [activeCard, setActiveCard] = useState(null);
+
+  // Animation Variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
 
   const trustCards = [
     {
@@ -38,28 +53,42 @@ const WhyUs = () => {
 
       {/* --- HERO SECTION --- */}
       <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Dark Overlay */}
-        <div className="absolute inset-0 z-0">
+        <motion.div 
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 z-0"
+        >
           <img 
             src="https://images.unsplash.com/photo-1698908701146-1ea6c4ebbabe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fE5pZ2h0JTIwY2l0eSUyMHN1cnZlaWxsYW5jZXxlbnwwfHwwfHx8MA%3D%3D" 
             alt="Security Essence" 
             className="w-full h-full object-cover opacity-50"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-        </div>
+        </motion.div>
 
-        <div className="relative z-10 text-center px-6">
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          className="relative z-10 text-center px-6"
+        >
           <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-4">
             Why <span className="text-yellow-400">Choose Us?</span>
           </h1>
           <div className="w-24 h-1 bg-yellow-400 mx-auto"></div>
-        </div>
+        </motion.div>
       </section>
 
       {/* --- OUR STORY SECTION --- */}
       <section className="py-20 px-6 md:px-16 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
             <span className="text-yellow-400 font-bold tracking-widest uppercase text-sm block mb-2">Est 2020</span>
             <h2 className="text-4xl md:text-6xl font-black uppercase mb-6 leading-tight">Our Story</h2>
             <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
@@ -73,13 +102,20 @@ const WhyUs = () => {
                 Today, we bridge the gap between innovation and protection, ensuring every home and business we touch is smarter, safer, and ready for the future.
               </p>
             </div>
-          </div>
+          </motion.div>
           
-          {/* --- TRUST CARDS (Matching Theme) --- */}
-          <div className="grid grid-cols-1 gap-6">
+          {/* --- TRUST CARDS (Staggered Animation) --- */}
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 gap-6"
+          >
             {trustCards.map((card, idx) => (
-              <div 
+              <motion.div 
                 key={idx} 
+                variants={fadeInUp}
                 className="bg-zinc-900/50 border border-white/10 p-8 rounded-2xl hover:border-yellow-400/50 transition-all duration-300 group"
               >
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">
@@ -87,31 +123,47 @@ const WhyUs = () => {
                 </div>
                 <h3 className="text-xl font-bold uppercase text-yellow-400 mb-2">{card.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{card.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* --- CORE BENEFITS SECTION (The Text you provided) --- */}
+      {/* --- CORE BENEFITS SECTION --- */}
       <section className="py-20 bg-zinc-950 border-y border-white/5 px-6 md:px-16">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
             <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">The Power of <span className="text-yellow-400">Total Surveillance</span></h2>
             <p className="text-gray-500 mt-4 max-w-2xl mx-auto uppercase tracking-widest text-xs">Innovation in protection</p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {benefits.map((benefit, idx) => (
-              <div key={idx} className="relative p-8 bg-black border border-white/5 hover:bg-zinc-900 transition-colors group">
+              <motion.div 
+                key={idx} 
+                variants={fadeInUp}
+                className="relative p-8 bg-black border border-white/5 hover:bg-zinc-900 transition-colors group"
+              >
                 <div className="absolute top-0 left-0 w-1 h-0 bg-yellow-400 group-hover:h-full transition-all duration-300"></div>
                 <h4 className="text-yellow-400 font-bold uppercase mb-4 tracking-wider">{benefit.title}</h4>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {benefit.text}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

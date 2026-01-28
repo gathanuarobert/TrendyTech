@@ -1,10 +1,25 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import { motion } from 'framer-motion'; // 1. Added Framer Motion
 
 const Contacts = () => {
   const phoneNumber = "+254792735124";
-  const emailAddress = "info@trendytech.co.ke"; // Replace with your actual email
+  const emailAddress = "info@trendytech.co.ke"; 
   const businessHours = "Mon - Sat: 8:00 AM - 6:00 PM";
+
+  // Animation Variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
 
   const contactMethods = [
     {
@@ -42,34 +57,49 @@ const Contacts = () => {
     <div className="min-h-screen bg-black text-white relative">
       <Navbar />
 
-      {/* --- ADDED HERO IMAGE SECTION --- */}
+      {/* --- HERO IMAGE SECTION --- */}
       <section className="relative h-[45vh] md:h-[55vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+        <motion.div 
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 z-0"
+        >
           <img 
             src="https://plus.unsplash.com/premium_photo-1681487394066-fbc71a037573?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c3VydmVpbGxhbmNlfGVufDB8fDB8fHww" 
             alt="Security Hub" 
             className="w-full h-full object-cover opacity-40"
           />
-          {/* Blend to Black Gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-        </div>
+        </motion.div>
 
-        <div className="relative z-10 text-center px-6 mt-20">
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          className="relative z-10 text-center px-6 mt-20"
+        >
           <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-4">
             Get In <span className="text-yellow-400">Touch</span>
           </h1>
           <div className="w-24 h-1 bg-yellow-400 mx-auto"></div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Decorative Glow */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-400/5 blur-[120px] pointer-events-none" />
 
-      {/* Content Wrap - Adjusted padding top for a smooth transition from Hero */}
+      {/* Content Wrap */}
       <main className="pt-20 pb-20 px-6 md:px-16 relative z-10 max-w-7xl mx-auto">
         
         {/* Header Section */}
-        <div className="mb-20">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="mb-20"
+        >
           <span className="text-yellow-400 font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Connect with us</span>
           <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-8">
             Let's Secure <br />
@@ -79,17 +109,23 @@ const Contacts = () => {
             Have questions about a CCTV installation or an electronic device? 
             Skip the forms and reach out to our technical team directly.
           </p>
-        </div>
+        </motion.div>
 
         {/* Action Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
+        >
           {contactMethods.map((method, idx) => (
-            <button
+            <motion.button
               key={idx}
+              variants={fadeInUp}
               onClick={method.action}
               className="group relative bg-zinc-900/30 border border-white/5 p-10 text-left transition-all duration-500 hover:bg-zinc-900/60 hover:border-yellow-400/50 overflow-hidden"
             >
-              {/* Hover highlight effect */}
               <div className="absolute -right-4 -top-4 w-24 h-24 bg-yellow-400/10 rounded-full blur-2xl group-hover:bg-yellow-400/20 transition-all" />
               
               <div className="mb-6">{method.icon}</div>
@@ -109,12 +145,18 @@ const Contacts = () => {
               <div className="mt-8 flex items-center gap-2 text-yellow-400 text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
                 Launch Now <span>→</span>
               </div>
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Business Info Footer */}
-        <div className="border-t border-white/10 pt-12 flex flex-col md:flex-row justify-between gap-8">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="border-t border-white/10 pt-12 flex flex-col md:flex-row justify-between gap-8"
+        >
           <div>
             <h4 className="text-sm font-black uppercase tracking-widest text-zinc-500 mb-4">Operations</h4>
             <p className="text-xl font-bold">{businessHours}</p>
@@ -124,7 +166,7 @@ const Contacts = () => {
             <p className="text-xl font-bold">Nairobi, Kenya</p>
             <p className="text-zinc-500 text-sm">Serving clients nationwide</p>
           </div>
-        </div>
+        </motion.div>
 
       </main>
     </div>
