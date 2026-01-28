@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+// Import the real data
+import { cctvData } from '../data/productData'; 
 
 const CCTVKits = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,14 +12,8 @@ const CCTVKits = () => {
   const itemsPerPage = 10;
   const phoneNumber = "254792735124";
 
-  // Mock data for 31 kits
-  const allKits = Array.from({ length: 31 }, (_, i) => ({
-    id: i + 1,
-    name: i % 2 === 0 ? `HIKVision Pro Kit ${i + 1}` : `Dahua Smart Security ${i + 1}`,
-    image: "https://images.unsplash.com/photo-1557597774-9d2739f85aae?q=80&w=500",
-    price: `Ksh ${(15000 + i * 1000).toLocaleString()}`,
-    desc: "Experience unmatched clarity with our professional CCTV kits. Featuring high-definition night vision, weather-resistant outer casings, and massive 1TB DVR storage for weeks of footage. Optimized for remote viewing via smartphone so you can watch over your property from anywhere in the world."
-  }));
+  // Use the imported cctvData instead of the mock array
+  const allKits = cctvData;
 
   // --- SEARCH LOGIC ---
   const filteredKits = useMemo(() => {
@@ -92,7 +88,11 @@ const CCTVKits = () => {
                   className="group cursor-pointer bg-zinc-900/30 border border-white/5 p-4 transition-all duration-300 hover:border-yellow-400/50 hover:bg-zinc-900/50"
                 >
                   <div className="relative aspect-square overflow-hidden mb-6 bg-zinc-800">
-                    <img src={kit.image} alt={kit.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <img 
+                      src={kit.image || "https://images.unsplash.com/photo-1557597774-9d2739f85aae?q=80&w=500"} 
+                      alt={kit.name} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                    />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="text-xs uppercase font-bold tracking-tighter bg-yellow-400 text-black px-4 py-2">Quick View</span>
                     </div>
@@ -141,7 +141,11 @@ const CCTVKits = () => {
           <div className="relative bg-[#0d0d0d] border border-white/10 w-full max-w-md md:max-w-4xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row shadow-2xl animate-in zoom-in-95 duration-200">
             <button onClick={() => setActiveCard(null)} className="absolute top-3 right-4 z-[1010] text-white/70 hover:text-yellow-400 text-2xl p-2 transition-colors md:top-4 md:right-4">✕</button>
             <div className="w-full md:w-1/2 h-48 sm:h-64 md:h-auto overflow-hidden bg-zinc-800">
-              <img src={activeCard.image} alt={activeCard.name} className="w-full h-full object-cover" />
+              <img 
+                src={activeCard.image || "https://images.unsplash.com/photo-1557597774-9d2739f85aae?q=80&w=500"} 
+                alt={activeCard.name} 
+                className="w-full h-full object-cover" 
+              />
             </div>
             <div className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto">
               <div className="flex flex-col h-full text-left">

@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+// Import your real data
+import { fenceData } from '../data/productData';
 
 const ElectricFence = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,14 +12,8 @@ const ElectricFence = () => {
   const itemsPerPage = 10;
   const phoneNumber = "254792735124";
 
-  // Mock data for Electric Fences (Replace these with your actual 30-40 items)
-  const allFences = Array.from({ length: 35 }, (_, i) => ({
-    id: i + 1,
-    name: i % 2 === 0 ? `JVA Energizer Kit Z${i + 1}` : `Hammer Electric Fence Pro ${i + 1}`,
-    image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=500", // Placeholder for fencing
-    price: `Ksh ${(25000 + i * 1500).toLocaleString()}`,
-    desc: "A complete high-tension security solution. This kit includes a high-voltage energizer, marine-grade stainless steel wire, heavy-duty insulators, and a back-up battery system. Designed to provide a powerful deterrent while triggering immediate alarms upon tampering or cutting."
-  }));
+  // Use the imported fence data
+  const allFences = fenceData;
 
   // Search Logic
   const filteredFences = useMemo(() => {
@@ -89,7 +85,11 @@ const ElectricFence = () => {
                   className="group cursor-pointer bg-zinc-900/30 border border-white/5 p-4 transition-all duration-300 hover:border-yellow-400/50 hover:bg-zinc-900/50"
                 >
                   <div className="relative aspect-square overflow-hidden mb-6 bg-zinc-800">
-                    <img src={fence.image} alt={fence.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <img 
+                      src={fence.image || "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=500"} 
+                      alt={fence.name} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                    />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="text-xs uppercase font-bold tracking-tighter bg-yellow-400 text-black px-4 py-2">View Details</span>
                     </div>
@@ -120,7 +120,7 @@ const ElectricFence = () => {
 
               <button 
                 disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(prev => prev - 1)}
+                onClick={() => setCurrentPage(prev => prev + 1)}
                 className={`px-6 py-2 border rounded-full text-xs font-bold uppercase tracking-widest transition-all ${currentPage === totalPages ? 'border-zinc-800 text-zinc-800' : 'border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black'}`}
               >Next</button>
             </div>
@@ -136,7 +136,11 @@ const ElectricFence = () => {
           <div className="relative bg-[#0d0d0d] border border-white/10 w-full max-w-md md:max-w-4xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row shadow-2xl animate-in zoom-in-95 duration-200">
             <button onClick={() => setActiveCard(null)} className="absolute top-3 right-4 z-[1010] text-white/70 hover:text-yellow-400 text-2xl p-2 transition-colors md:top-4 md:right-4">✕</button>
             <div className="w-full md:w-1/2 h-48 sm:h-64 md:h-auto overflow-hidden bg-zinc-800">
-              <img src={activeCard.image} alt={activeCard.name} className="w-full h-full object-cover" />
+              <img 
+                src={activeCard.image || "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=500"} 
+                alt={activeCard.name} 
+                className="w-full h-full object-cover" 
+              />
             </div>
             <div className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto">
               <div className="flex flex-col h-full text-left">

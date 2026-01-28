@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+// Import your real data
+import { electronicsData } from '../data/productData';
 
 const Electronics = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,14 +12,8 @@ const Electronics = () => {
   const itemsPerPage = 10;
   const phoneNumber = "254792735124";
 
-  // Mock data for Electronics (Replace these with your actual 30-40 items)
-  const allElectronics = Array.from({ length: 38 }, (_, i) => ({
-    id: i + 1,
-    name: i % 2 === 0 ? `UltraWide Monitor ${i + 1}"` : `Pro-Tech Wireless Headphones v${i + 1}`,
-    image: "https://images.unsplash.com/photo-1526738549149-8e07eca275d4?q=80&w=500", // Electronics placeholder
-    price: `Ksh ${(8500 + i * 2000).toLocaleString()}`,
-    desc: "Experience high-performance technology designed for the modern professional. Built with durability and cutting-edge features, this product offers seamless compatibility and superior efficiency for your daily tech needs."
-  }));
+  // Use the imported data
+  const allElectronics = electronicsData;
 
   // Search Logic
   const filteredTech = useMemo(() => {
@@ -90,7 +86,11 @@ const Electronics = () => {
                   className="group cursor-pointer bg-zinc-900/30 border border-white/5 p-4 transition-all duration-300 hover:border-yellow-400/50 hover:bg-zinc-900/50"
                 >
                   <div className="relative aspect-square overflow-hidden mb-6 bg-zinc-800">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <img 
+                      src={item.image || "https://images.unsplash.com/photo-1526738549149-8e07eca275d4?q=80&w=500"} 
+                      alt={item.name} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                    />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="text-xs uppercase font-bold tracking-tighter bg-yellow-400 text-black px-4 py-2">Quick View</span>
                     </div>
@@ -121,7 +121,7 @@ const Electronics = () => {
 
               <button 
                 disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(prev => prev + 1)}
+                onClick={() => setCurrentPage(prev => prev - 1)}
                 className={`px-6 py-2 border rounded-full text-xs font-bold uppercase tracking-widest transition-all ${currentPage === totalPages ? 'border-zinc-800 text-zinc-800' : 'border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black'}`}
               >Next</button>
             </div>
@@ -139,7 +139,11 @@ const Electronics = () => {
           <div className="relative bg-[#0d0d0d] border border-white/10 w-full max-w-md md:max-w-4xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row shadow-2xl animate-in zoom-in-95 duration-200">
             <button onClick={() => setActiveCard(null)} className="absolute top-3 right-4 z-[1010] text-white/70 hover:text-yellow-400 text-2xl p-2 transition-colors md:top-4 md:right-4">✕</button>
             <div className="w-full md:w-1/2 h-48 sm:h-64 md:h-auto overflow-hidden bg-zinc-800">
-              <img src={activeCard.image} alt={activeCard.name} className="w-full h-full object-cover" />
+              <img 
+                src={activeCard.image || "https://images.unsplash.com/photo-1526738549149-8e07eca275d4?q=80&w=500"} 
+                alt={activeCard.name} 
+                className="w-full h-full object-cover" 
+              />
             </div>
             <div className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto">
               <div className="flex flex-col h-full text-left">
