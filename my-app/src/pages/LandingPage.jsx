@@ -28,20 +28,20 @@ export default function LandingPage() {
       path: "/cctvKits"
     },
     { 
-      name: "Smart TV", 
-      image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=400", 
+      name: "Monitors", 
+      image: "https://images.unsplash.com/photo-1590212151175-e58edd96185b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1vbml0b3J8ZW58MHx8MHx8fDA%3D", 
       desc: "Immersive 4K displays featuring the latest smart apps and seamless connectivity. Upgrade your home entertainment with our premium range.",
       path: "/electronics"
     },
     { 
       name: "Smartphone", 
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=400", 
+      image: "https://images.unsplash.com/photo-1606735608655-5f784a76416e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGlwaG9uZSUyMDE0JTIwcHJvJTIwZGFya3xlbnwwfHwwfHx8MA%3D%3D", 
       desc: "Stay connected with the latest high-performance smartphones. We offer top-tier brands with official warranties and technical support.",
       path: "/electronics"
     },
     { 
       name: "Electric Fence", 
-      image: "https://images.unsplash.com/photo-1589935447067-5531094415d1?q=80&w=400", 
+      image: "https://media.istockphoto.com/id/1155284279/photo/wall-with-electrified-fence.webp?a=1&b=1&s=612x612&w=0&k=20&c=f0YE9m7Bt7EuqN3fMbHTzNs5It_zbsLVyLLl9uIRLfQ=", 
       desc: "Advanced perimeter protection featuring high-tension wires and instant alarm triggers. Secure your property with our professional fencing.",
       path: "/electricFence"
     },
