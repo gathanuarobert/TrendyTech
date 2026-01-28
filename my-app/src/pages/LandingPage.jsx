@@ -42,16 +42,16 @@ export default function LandingPage() {
       desc: "High-definition surveillance with night vision and remote mobile viewing. We provide and install complete sets for 24/7 protection.",
       path: "/cctvKits"
     },
+    // { 
+    //   name: "Monitors", 
+    //   image: "https://images.unsplash.com/photo-1590212151175-e58edd96185b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1vbml0b3J8ZW58MHx8MHx8fDA%3D", 
+    //   desc: "Immersive 4K displays featuring the latest smart apps and seamless connectivity. Upgrade your home entertainment with our premium range.",
+    //   path: "/electronics"
+    // },
     { 
-      name: "Monitors", 
-      image: "https://images.unsplash.com/photo-1590212151175-e58edd96185b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1vbml0b3J8ZW58MHx8MHx8fDA%3D", 
-      desc: "Immersive 4K displays featuring the latest smart apps and seamless connectivity. Upgrade your home entertainment with our premium range.",
-      path: "/electronics"
-    },
-    { 
-      name: "Smartphone", 
+      name: "Smartphones & Displays", 
       image: "https://images.unsplash.com/photo-1606735608655-5f784a76416e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGlwaG9uZSUyMDE0JTIwcHJvJTIwZGFya3xlbnwwfHwwfHx8MA%3D%3D", 
-      desc: "Stay connected with the latest high-performance smartphones. We offer top-tier brands with official warranties and technical support.",
+      desc: "Stay connected with the latest high-performance smartphones and displays. We offer top-tier brands with official warranties and technical support.",
       path: "/electronics"
     },
     { 
@@ -59,6 +59,12 @@ export default function LandingPage() {
       image: "https://media.istockphoto.com/id/1155284279/photo/wall-with-electrified-fence.webp?a=1&b=1&s=612x612&w=0&k=20&c=f0YE9m7Bt7EuqN3fMbHTzNs5It_zbsLVyLLl9uIRLfQ=", 
       desc: "Advanced perimeter protection featuring high-tension wires and instant alarm triggers. Secure your property with our professional fencing.",
       path: "/electricFence"
+    },
+    { 
+      name: "Smart Home System", 
+      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=387", 
+      desc: "Integrated smart home solutions for lighting, climate, and security control. Experience convenience and efficiency at your fingertips.",
+      path: "/smartHome"
     },
   ];
 
