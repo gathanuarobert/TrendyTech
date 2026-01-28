@@ -677,3 +677,45 @@ export const electronicsData = [
     desc: "Ultra-portable and powerful. The perfect everyday laptop for students and professionals on the move.",
   },
 ];
+
+export const smartHomeData = [
+  {
+    id: 1,
+    name: "Google Nest Thermostat",
+    image:
+      "https://images.unsplash.com/photo-1606813909353-5e2f6b1b8b4e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z29vZ2xlJTIwbmVzdCUyMHRoZXJtb3N0YXR8ZW58MHx8MHx8fDA%3D",
+    price: "Ksh 18,000",
+    desc: "Smart thermostat that learns your schedule and helps save energy with remote control via smartphone.",
+  },
+  {
+    id: 2,
+    name: "Philips Hue White and Color Ambiance Starter Kit",
+    image:
+      "https://images.unsplash.com/photo-1582719478147-1f5b3e4b6e2e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGhpbGlwc3xlbnwwfHwwfHx8MA%3D%3D",
+    price: "Ksh 25,000",
+    desc: "Smart lighting system with customizable colors and brightness, controllable via app or voice assistants.",
+  },
+  {
+    id: 3,
+    name: "Amazon Echo Dot (5th Gen)",
+    image:
+      "https://images.unsplash.com/photo-1612832021049-6f0b8f4b8c4e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGFtYXpvbiUyMGVjaG8lMjBkb3QlMjA1dGglMjBnZW58ZW58MHx8MHx8fDA%3D", price: "Ksh 15,000",
+    desc: "Voice-controlled smart speaker with a 360° sound experience and compatibility with Alexa skills.",
+  },
+  {
+    id: 4,
+    name: "Ring Video Doorbell 4",
+    image:
+      "https://images.unsplash.com/photo-1612831455543-8f0b7f4b7c4e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmluZyUyMHZpZGVvJTIwZG9vcmJlbGwlMjA0fGVufDB8fDB8fHww",
+    price: "Ksh 30,000",
+    desc: "Smart video doorbell with HD video, two-way talk, and motion detection for enhanced home security.",
+  },
+  {
+    id: 5,
+    name: "TP-Link Kasa Smart Plug",
+    image:
+      "https://images.unsplash.com/photo-1596495577886-d920f1fbf0b4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHB8ZW58MHx8MHx8fDA%3D",
+    price: "Ksh 3,500",
+    desc: "Smart plug that allows you to control appliances remotely via app or voice commands with Alexa and Google Assistant.",
+  }
+];

@@ -6,6 +6,7 @@ import CctvInstallation from "./components/CctvInstallation";
 import ElectricFence from "./components/ElectricFence";
 import Electronics from "./components/Electronics";
 import Recovery from "./components/Recovery";
+import SmartHome from "./components/SmartHome";
 import ElectricFenceInstallation from "./components/ElectricFenceInstallation";
 import CCTVKits from "./components/CCTVKits";
 import Contacts from "./pages/Contacts";
@@ -93,6 +94,7 @@ const AppRoutes = () => {
           <Route path='/recovery' element={<PageReveal><Recovery /></PageReveal>} />
           <Route path='/electricFenceInstallation' element={<PageReveal><ElectricFenceInstallation /></PageReveal>} />
           <Route path='/cctvKits' element={<PageReveal><CCTVKits /></PageReveal>} />
+          <Route path='/smartHome' element={<PageReveal><SmartHome /></PageReveal>} />
         </Routes>
       </AnimatePresence>
     </>

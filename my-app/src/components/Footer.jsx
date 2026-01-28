@@ -1,26 +1,54 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion"; // Added Framer Motion
 
 const Footer = () => {
+  // Animation Variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
+
   return (
     <footer className="bg-[#0a0a0a] pt-24 pb-12 px-6 md:px-16 relative overflow-hidden border-t border-white/10">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="mb-16"
+        >
           <h3 className="text-xl md:text-2xl font-bold uppercase tracking-widest text-white mb-4">
             Let's talk about your needs.
           </h3>
           <h2 className="text-4xl md:text-7xl font-light text-gray-400 tracking-tight">
             Get in touch with us.
           </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
-          <div className="space-y-6 text-gray-400 text-lg md:text-xl">
-            <div className="flex items-start gap-4">
+        </motion.div>
+
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10"
+        >
+          <motion.div variants={fadeInUp} className="space-y-6 text-gray-400 text-lg md:text-xl">
+            {/* <div className="flex items-start gap-4">
               <span className="text-yellow-400 mt-1">📍</span>
               <p>
                 Jasmine Centre – Suite C5, Block C, Westlands, Nairobi Kenya
               </p>
-            </div>
+            </div> */}
             <div className="flex items-start gap-4">
               <span className="text-yellow-400 mt-1">📞</span>
               <p>(+254) 0792735124</p>
@@ -31,8 +59,9 @@ const Footer = () => {
                 info@trendytech.co.ke
               </p>
             </div>
-          </div>
-          <div className="flex flex-col gap-6 items-start md:items-end">
+          </motion.div>
+
+          <motion.div variants={fadeInUp} className="flex flex-col gap-6 items-start md:items-end">
             <Link
               to="/whyus"
               className="text-xl font-bold border-b-2 border-white/20 hover:border-yellow-400 pb-1 uppercase tracking-widest transition-all inline-block"
@@ -46,9 +75,16 @@ const Footer = () => {
             >
               Leave a message
             </Link>
-          </div>
-        </div>
-        <div className="mt-32 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest gap-4">
+          </motion.div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="mt-32 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest gap-4"
+        >
           <p>© {new Date().getFullYear()} TrendyTech | All Rights Reserved</p>
           <p>
             Developed by{" "}
@@ -56,10 +92,17 @@ const Footer = () => {
               Apex Software Solutions
             </span>
           </p>
-        </div>
+        </motion.div>
       </div>
+
       {/* Decorative SVG Waveform */}
-      <div className="absolute bottom-0 right-0 left-0 h-40 opacity-10 pointer-events-none">
+      <motion.div 
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 0.1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5 }}
+        className="absolute bottom-0 right-0 left-0 h-40 opacity-10 pointer-events-none"
+      >
         <svg
           className="w-full h-full"
           viewBox="0 0 1000 100"
@@ -72,7 +115,7 @@ const Footer = () => {
             strokeWidth="1"
           />
         </svg>
-      </div>
+      </motion.div>
     </footer>
   );
 };

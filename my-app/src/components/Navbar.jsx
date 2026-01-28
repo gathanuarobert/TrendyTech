@@ -22,7 +22,8 @@ const Navbar = () => {
       dropdown: [
         { name: "Electronics", path: "/electronics" },
         { name: "CCTV kits", path: "/cctvKits" },
-        { name: "Electric Fences", path: "/electricFence" }
+        { name: "Electric Fences", path: "/electricFence" },
+        { name: "Smart Home Systems", path: "/smartHome" },
       ] 
     },
     { 
