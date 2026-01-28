@@ -171,7 +171,7 @@ export default function LandingPage() {
           variants={fadeInUp}
           className="text-3xl md:text-5xl font-bold text-center mb-16 tracking-widest uppercase"
         >
-          EXPLORE OUR <span className="text-yellow-400">SERVICES</span>
+          EXPLORE OUR <span className="text-yellow-400">PRODUCTS</span>
         </motion.h3>
         
         <motion.div 
