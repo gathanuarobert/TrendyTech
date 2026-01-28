@@ -150,7 +150,7 @@ export default function LandingPage() {
             </p>
             <div className="pt-8">
               <div className="flex items-baseline gap-4">
-                <span className="text-7xl md:text-8xl font-black text-white">8+</span>
+                <span className="text-7xl md:text-8xl font-black text-white">10+</span>
                 <div className="flex flex-col">
                   <span className="text-yellow-400 font-bold uppercase tracking-widest text-sm">Years of</span>
                   <span className="text-white font-black text-2xl uppercase tracking-tighter">Experience</span>
