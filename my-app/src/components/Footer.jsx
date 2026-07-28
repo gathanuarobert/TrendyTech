@@ -99,13 +99,13 @@ const Footer = () => {
           <p>
             Developed by{" "}
             <a
-              href="https://apex-software-solutions-eight.vercel.app/"
+              href="https://flowmerce.co.ke/"
               target="_blank"
               rel="noopener noreferrer"
               className="group"
             >
               <span className="text-white font-bold transition-colors underline underline-offset-4 group-hover:text-yellow-400 cursor-pointer">
-                Apex Software Solutions
+                Flowmerce Technologies
               </span>
             </a>
           </p>
